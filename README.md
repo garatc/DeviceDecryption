@@ -1,8 +1,12 @@
-# Another Bitpixie PoC
+# Yet another Bitpixie PoC
 
-No need to open up computers to decrypt and mount (PINless) Bitlocker partitions anymore, you just need a LAN cable and understand what you are doing.   
+Another PoC for Bitpixie, a vulnerability discovered by Rairii in August 2022 which can be used to decrypt and mount partitions encrypted with default Bitlocker Device Encryption.
 
-Many thanks to th0mas from Neodyme for his articles on the matter. See https://neodyme.io/en/blog/bitlocker_screwed_without_a_screwdriver and https://neodyme.io/en/blog/bitlocker_why_no_fix/.
+Many thanks to th0mas from Neodyme for his brilliant articles on the matter. See https://neodyme.io/en/blog/bitlocker_screwed_without_a_screwdriver and https://neodyme.io/en/blog/bitlocker_why_no_fix/.
+
+This repo also features an exploit for CVE-2024-1086 on the Linux kernel, which was written by notselwyn.
+
+Take a look at the repos from [Andreas Grasser](https://github.com/andigandhi/bitpixie) and [Marc André Tanner](https://github.com/martanne/bitpixie), who made their PoCs public before I did and probably put more thoughts into it.
 
 ## Exploit
 
