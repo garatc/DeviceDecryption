@@ -1,10 +1,10 @@
-# Intro
+# Another Bitpixie PoC
 
 No need to open up computers to decrypt and mount (PINless) Bitlocker partitions anymore, you just need a LAN cable and understand what you are doing.   
 
 Many thanks to th0mas from Neodyme for his articles on the matter. See https://neodyme.io/en/blog/bitlocker_screwed_without_a_screwdriver and https://neodyme.io/en/blog/bitlocker_why_no_fix/.
 
-# Exploit
+## Exploit
 
 - Put `create_modded_bcd.bat` into a USB stick which you'll plug into the target device (or use an SMB share if USB is completely disabled).
 - Get a Windows Recovery shell. Can be achieved by pressing Shift while clicking "restart" from the Windows login screen, or by typing "shutdown /r /o /t 0" in a terminal if you're logged in.
@@ -44,7 +44,7 @@ Many thanks to th0mas from Neodyme for his articles on the matter. See https://n
 * Now the decrypted partition should be under mnt/, enjoy! You could use it to copy the SAM hives, modify exe paths for privesc, rename AV/EDR folders so they stop working, ...
 * **Do not forget to umount**
 
-# PXE server
+## PXE server
  TFTP-root/ will be your serving TFTP folder for the PXE boot. You'll only need to copy paste the modified BCD file into Boot/, everything else should be left untouched.
 
 There are 3 subfolders:
@@ -59,7 +59,7 @@ As for the files:
 - **grubx64.efi**: grub boot file that loads the grub/grub.cfg and enables you to boot into Linux
 - **shimx64.efi**: shim boot file that loads the grubx64.efi file
 
-# Tips
+## Tips
 * File names ARE case sensitive when booting via PXE, so if the target device is looking for BOOTMGFW.EFI instead of bootmgfw.efi, rename it as such.
 * If you can't use a keyboard on the target device (which is likely if this isn't a laptop and keyboards are external devices), you can just use SSH to connect to it and run the exploit.
 * You won't have write access to the Bitlocker partition if you haven't shut down the Windows client properly (Windows hibernation system). Make sure you don't hold the power button and force the shutdown. If you want to be safe, use `shutdown /s /t 0` (shutdown) or `shutdown /r /o /t 0` (reboot) or just click "shut down" or "restart" if you aren't logged in (and wait properly)
@@ -68,7 +68,7 @@ As for the files:
 * If absolutely no 3rd party distribution is allowed to boot (the shimx64.efi file not properly going through PXE can be diagnostic of that) because Secure Boot 3rd party certificates are not allowed, you will have to read the memory from Windows instead. This project seems to have made some progress on a WinPE exploit: https://github.com/martanne/bitpixie. 
 * On AMD hardware, disabling SVM virtualization in the BIOS might be necessary to boot Linux. If you cannot turn it off, see previous point for how to exploit from a Windows partition.
 
-# Unexploitable cases
+## Unexploitable cases
 This particular exploit will not work in the following scenarios (but TPM sniffing and lesser-known software exploits might still do):
 * A PIN or key file is required to unlock the drive.
 * PXE boot is completely disabled and you also cannot boot via USB (otherwise you could try using a USB-Ethernet dongle). You could theoretically reset the UEFI from the motherboard if PXE is allowed by default, but that is risky.
