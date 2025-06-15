@@ -11,14 +11,14 @@ Take a look at the repos from [Andreas Grasser](https://github.com/andigandhi/bi
 ## Exploit
 
 - Put `create_modded_bcd.bat` into a USB stick which you'll plug into the target device (or use an SMB share if USB is completely disabled).
-- Get a Windows Recovery shell. Can be achieved by pressing Shift while clicking "restart" from the Windows login screen, or by typing "shutdown /r /o /t 0" in a terminal if you're logged in.
+- Get a Windows Recovery shell. Can be achieved by pressing Shift while clicking "restart" from the Windows login screen, or by typing `shutdown /r /o /t 0` in a terminal if you're logged in.
 - Once in the recovery shell, get into your USB disk and execute the script ("e:" is wherever your USB disk was mounted):  
     ```
     e:
     create_modded_bcd.bat
     ```
 - Then, move the newly created `BCD` file from your USB disk (or SMB share) into the `TFTP-root/Boot/` folder on your Linux attacking device.
-- Now plug a LAN cable between your device and the target and configure a quick LAN network with TFTP support ($ABS_TFTP_ROOT corresponds to the TFTP-root folder of this repo):
+- Now plug a LAN cable between your device and the target and configure a quick LAN network with TFTP support (`$ABS_TFTP_ROOT` corresponds to the TFTP-root folder of this repo):
     ```
     sudo dnsmasq --no-daemon \
     --interface="$INTERFACE" \
