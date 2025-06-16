@@ -4,7 +4,7 @@ Another PoC for Bitpixie, a vulnerability discovered by Rairii in August 2022 wh
 
 Many thanks to th0mas from Neodyme for his brilliant articles on the matter. See https://neodyme.io/en/blog/bitlocker_screwed_without_a_screwdriver and https://neodyme.io/en/blog/bitlocker_why_no_fix/.
 
-This repo also features an exploit for CVE-2024-1086 on the Linux kernel, which was written by notselwyn.
+This repo also features an exploit for CVE-2024-1086 on the Linux kernel, which was written by [Notselwyn](https://github.com/Notselwyn/CVE-2024-1086).
 
 Take a look at the repos from [Andreas Grasser](https://github.com/andigandhi/bitpixie) and [Marc André Tanner](https://github.com/martanne/bitpixie), who made their PoCs public before I did and probably put more thoughts into it.
 
@@ -79,3 +79,6 @@ This particular exploit will not work in the following scenarios (but TPM sniffi
 * Any Bitlocker configuration (e.g., Bitlocker Legacy) where other PCRs than 7 & 11 are used (run the following command with admin privileges if you can, to verify: `manage-bde -protectors -get c:`)
 * KB5025885 is installed (unlikely).
 * The bootloader is signed with something else than the 2011 Secure Boot certificate (unlikely). If you're logged in you can directly check the signature of bootmgr.efi in C:\Windows\Boot\EFI\ or after mounting the EFI partition from the recovery shell (via the `mountvol s: /s` command).
+
+## Disclaimer
+This repository and all its contents are for educational and research purposes only. Do not use this exploit on systems you do not own or have explicit permission to test. The author(s) assume no liability for any misuse or damage caused by this material.
